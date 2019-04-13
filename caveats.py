@@ -10,7 +10,7 @@ list_numbers = list_thing(NUMBER)
 
 key = NAME('key')
 opr = oneOf(' '.join(VALID_OPERATIONS))('operation')
-val = Or([NAME, NUMBER, list_names, list_numbers])('value')
+val = (NAME | NUMBER | list_names | list_numbers)('value')
 parser = key + opr + val
 parse = parser.parseString
 
