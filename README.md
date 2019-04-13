@@ -1,16 +1,16 @@
 ## cavlang
 
-cavlang is a small library for parsing and evaluating [Macaroon-style caveats](https://ai.google/research/pubs/pub41892).
+`cavlang` is a small library for parsing and evaluating [Macaroon-style caveats](https://ai.google/research/pubs/pub41892). Some caveats you can express in `cavlang`:
 
-Some example caveats you can express in cavlang:
+```
+username = alice
 
-`username = alice`
+object_id = 17
 
-`object_id = 17`
+current_time <= 1555187389
 
-`current_time <= 1555187389`
-
-`operation in [read write]`
+operation in [read write]
+```
 
 ## example usage
 
