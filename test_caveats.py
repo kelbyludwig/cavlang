@@ -1,7 +1,7 @@
 import pytest
 from caveats import parse, evaluate
 
-TEST_CONTEXT = {'a': 1, 'b': 2, 'foo': 'bar'}
+TEST_CONTEXT = {'user_id': 1, 'expires': 100, 'username': 'alice', 'op': 'READ'}
 
 @pytest.mark.parametrize('caveat,expected', [
         ('k = v', ['k', '=', 'v']),
@@ -25,8 +25,12 @@ def test_parser(caveat, expected):
     assert(result[2] == expected[2])
 
 @pytest.mark.parametrize('s,context,expected', [
-        ('foo = bar', TEST_CONTEXT, True),
-        ('dne = dne', TEST_CONTEXT, False),
+        ('user_id = 1', TEST_CONTEXT, True),
+        ('missing_context_key = dne', TEST_CONTEXT, False),
+        ('expires <= 100', TEST_CONTEXT, True),
+        ('username != bob', TEST_CONTEXT, True),
+        ('op in [READ WRITE]', TEST_CONTEXT, True),
+        ('op in [WRITE]', TEST_CONTEXT, False),
     ])
 def test_evaluate(s, context, expected):
     assert(evaluate(context, s) == expected)
