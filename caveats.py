@@ -5,7 +5,7 @@ def to_int(tokens):
     return int(tokens[0])
 
 VALID_OPERATIONS = ('=', '<', '>', '<=', '>=', '!=', 'in')
-NAME = Word(alphas, min=1, max=64)
+NAME = Word(alphas + '_.-:', min=1, max=64)
 NUMBER = Word(nums, min=1, max=64).addParseAction(to_int)
 suppress = lambda c: Suppress(Literal(c))
 list_thing = lambda t: Group(suppress('[') + ZeroOrMore(t) + suppress(']'))

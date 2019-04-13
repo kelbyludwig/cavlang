@@ -15,6 +15,7 @@ TEST_CONTEXT = {'a': 1, 'b': 2, 'foo': 'bar'}
         ('k in []', ['k', 'in', []]),
         ('curtime <= 123', ['curtime', '<=', 123]),
         ('abc in [1 2 3]', ['abc', 'in', [1, 2, 3]]),
+        ('urn:foo:bar.baz_baz = a:b-c', ['urn:foo:bar.baz_baz', '=', 'a:b-c']),
     ])
 def test_parser(caveat, expected):
     result = parse(caveat)
