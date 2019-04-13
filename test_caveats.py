@@ -33,6 +33,9 @@ def test_parser(caveat, expected):
         'foo = [string, 123]',
         'foo = [[heheh]]',
         'foo = 1.0',
+        'A' * 100 + ' = foo',
+        '    = bar',
+        'foo = ',
 ])
 def test_invalid_strings(caveat):
     with pytest.raises(ParseException):
