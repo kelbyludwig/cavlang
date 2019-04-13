@@ -7,14 +7,14 @@ def to_int(tokens):
 VALID_OPERATIONS = ('=', '<', '>', '<=', '>=', '!=', 'in')
 NAME = Word(alphas + '_.-:', min=1, max=64)
 NUMBER = Word(nums, min=1, max=64).addParseAction(to_int)
-suppress = lambda c: Suppress(Literal(c))
-list_thing = lambda t: Group(suppress('[') + ZeroOrMore(t) + suppress(']'))
-list_names = list_thing(NAME)
-list_numbers = list_thing(NUMBER)
+LBRACE, RBRACE = Literal('['), Literal(']')
+LIST_T = lambda t: Group(Suppress(LBRACE) + ZeroOrMore(t) + Suppress(RBRACE))
+LIST_NAMES = LIST_T(NAME)
+LIST_NUMBERS = LIST_T(NUMBER)
 
 key = NAME('key')
 opr = oneOf(' '.join(VALID_OPERATIONS))('operation')
-val = (NAME | NUMBER | list_names | list_numbers)('value')
+val = (NAME | NUMBER | LIST_NAMES | LIST_NUMBERS)('value')
 parser = key + opr + val
 parse = parser.parseString
 
