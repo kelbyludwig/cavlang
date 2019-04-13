@@ -1,6 +1,7 @@
 from pyparsing import (
     Word, Literal, Group, Suppress, 
     ZeroOrMore, oneOf, alphas, nums,
+    StringStart, StringEnd
 )
 
 # defined operations and their respective python functions
@@ -36,7 +37,7 @@ LIST_NUMBERS = LIST_T(NUMBER)
 KEY = NAME
 OPR = oneOf(' '.join(VALID_OPERATIONS))
 VAL = NAME | NUMBER | LIST_NAMES | LIST_NUMBERS
-PARSER = KEY + OPR + VAL
+PARSER = StringStart() + KEY + OPR + VAL + StringEnd()
 
 def parse(s):
     '''parse parses a string and returns the result as a list of:
