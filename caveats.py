@@ -18,7 +18,8 @@ val = (NAME | NUMBER | LIST_NAMES | LIST_NUMBERS)('value')
 parser = key + opr + val
 parse = parser.parseString
 
-def evaluate(context, caveat):
+def evaluate(context, s):
+    caveat = parse(s)
     if caveat.key not in context:
         return False
     return True

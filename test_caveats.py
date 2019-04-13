@@ -22,10 +22,9 @@ def test_parser(caveat, expected):
     assert(len(expected) == 3)
     assert(result.asList() == expected)
 
-@pytest.mark.parametrize('caveat_string,context,expected', [
+@pytest.mark.parametrize('s,context,expected', [
         ('foo = bar', TEST_CONTEXT, True),
         ('dne = dne', TEST_CONTEXT, False),
     ])
-def test_evaluate(caveat_string, context, expected):
-    caveat = parse(caveat_string)
-    assert(evaluate(context, caveat) == expected)
+def test_evaluate(s, context, expected):
+    assert(evaluate(context, s) == expected)
