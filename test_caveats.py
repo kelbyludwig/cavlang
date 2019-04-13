@@ -13,8 +13,8 @@ TEST_CONTEXT = {'a': 1, 'b': 2, 'foo': 'bar'}
         ('foo != bar', ['foo', '!=', 'bar']),
         ('k in [a]', ['k', 'in', ['a']]),
         ('k in []', ['k', 'in', []]),
-        ('curtime <= 123', ['curtime', '<=', '123']),
-        ('abc in [1 2 3]', ['abc', 'in', ['1', '2', '3']]),
+        ('curtime <= 123', ['curtime', '<=', 123]),
+        ('abc in [1 2 3]', ['abc', 'in', [1, 2, 3]]),
     ])
 def test_parser(caveat, expected):
     result = parse(caveat)

@@ -1,8 +1,12 @@
 from pyparsing import *
 
+def to_int(tokens):
+    assert(len(tokens) == 1)
+    return int(tokens[0])
+
 VALID_OPERATIONS = ('=', '<', '>', '<=', '>=', '!=', 'in')
-NAME = Word(alphanums, min=1, max=64)
-NUMBER = Word(nums, min=1, max=64)
+NAME = Word(alphas, min=1, max=64)
+NUMBER = Word(nums, min=1, max=64).addParseAction(to_int)
 suppress = lambda c: Suppress(Literal(c))
 list_thing = lambda t: Group(suppress('[') + ZeroOrMore(t) + suppress(']'))
 list_names = list_thing(NAME)
