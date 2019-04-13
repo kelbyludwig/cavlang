@@ -1,6 +1,8 @@
 import pytest
-from caveats import parse, evaluate
 from pyparsing import ParseException
+from caveats import parse, evaluate, VALID_OPERATIONS
+from hypothesis import given
+from hypothesis.strategies import text
 
 TEST_CONTEXT = {"user_id": 1, "expires": 100, "username": "alice", "op": "READ"}
 
@@ -63,3 +65,21 @@ def test_invalid_strings(caveat):
 )
 def test_evaluate(s, context, expected):
     assert evaluate(context, s) == expected
+
+
+def _type_check(types, o):
+    # check if an object is one of many types
+    return any([isinstance(o, t) for t in types])
+
+
+@given(text())
+def test_fuzz_invalid(caveat):
+    try:
+        result = parse(caveat)
+    except ParseException:
+        # parse errors are probably a good thing. keep moving along.
+        return
+    key, opr, val = result
+    assert opr in VALID_OPERATIONS
+    assert _type_check([str], key)
+    assert _type_check([str, int, list], val)
