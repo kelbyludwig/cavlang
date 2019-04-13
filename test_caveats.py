@@ -20,7 +20,9 @@ TEST_CONTEXT = {'a': 1, 'b': 2, 'foo': 'bar'}
 def test_parser(caveat, expected):
     result = parse(caveat)
     assert(len(expected) == 3)
-    assert(result.asList() == expected)
+    assert(result[0] == expected[0])
+    assert(result[1] == expected[1])
+    assert(result[2] == expected[2])
 
 @pytest.mark.parametrize('s,context,expected', [
         ('foo = bar', TEST_CONTEXT, True),
