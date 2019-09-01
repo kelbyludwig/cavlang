@@ -9,7 +9,7 @@ object_id = 17
 
 current_time <= 1555187389
 
-operation in [read write]
+operation in [read, write]
 ```
 
 ## example usage
